@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cooking Game</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+      background: linear-gradient(120deg, #ff9a9e, #fad0c4);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+      justify-content: center;
+    }
+    h1 {
+      font-size: 2.5rem;
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+    p {
+      color: #ffffff;
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+    #game {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    }
+    .ingredient {
+      width: 80px;
+      height: 80px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 10px;
+      cursor: grab;
+      border: 2px solid #ffffff;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      font-size: 2rem;
+    }
+    #pot {
+      width: 150px;
+      height: 150px;
+      border: 5px solid #ffffff;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fff5e6, #ffd1a4);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      position: relative;
+      margin: 20px;
+      overflow: hidden;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+    .pot-ingredient {
+      font-size: 1.5rem;
+      margin: 2px;
+    }
+    #result {
+      margin-top: 10px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #ffffff;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 10px 20px;
+      border-radius: 10px;
+    }
+    #cook-btn {
+        margin-top: 50px;
+        width: 7rem;
+        height: 3rem;
+        border-radius: 50px;
+        font-size: 20px;
+
+        background: radial-gradient(circle, #fff5e6, #ffd1a4);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+    #cook-btn:hover {
+      background: radial-gradient(circle, #ffebcc, #f79f81);
+    }
+
+    #reset {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    #reset button {
+      background: radial-gradient(circle, #ffebcc, #f79f81);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-size: 1rem;
+      color: black;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+      margin: 20px;
+    }
+
+    #reset button:hover {
+        background: radial-gradient(circle, #fff5e6, #ffd1a4);
+    }
+
+    #trying {
+        display: flex;
+        flex-direction: row;
+    }
+    #game {
+        width: 80%;
+    }
+    /* #pot {
+        width:20%;
+    } */
+     .goofy {
+      width: 250px;
+      color: #ffebcc;
+      margin-left: 100%;
+      display: none;
+     }
+
+     .bottom {
+      display: flex;
+      flex-direction: row;
+     }
+     .left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+     }
+
+     /* .header {
+      display: none;
+     } */
+  </style>
+</head>
+<body>
+  <div id="reset">
+    <button onclick="location.reload()" id="reset-btn" >Reset Game.</button>
+  </div>
+
+  <div class="header">
+    <h1>Cooking Game</h1>
+    <p>Drag the ingredients into the pot to cook your dish!</p><br><br>
+  </div>
+
+  <div id="trying">
+    <div id="game">
+        <div class="ingredient" draggable="true" data-ingredient="🥕">🥕</div>
+        <div class="ingredient" draggable="true" data-ingredient="🍅">🍅</div>
+        <div class="ingredient" draggable="true" data-ingredient="🧀">🧀</div>
+        <div class="ingredient" draggable="true" data-ingredient="🌽">🌽</div>
+        <div class="ingredient" draggable="true" data-ingredient="🥦">🥦</div>
+        <div class="ingredient" draggable="true" data-ingredient="🥚">🥚</div>
+        <div class="ingredient" draggable="true" data-ingredient="🧅">🧅</div>
+        <div class="ingredient" draggable="true" data-ingredient="🥬">🥬</div>
+        <div class="ingredient" draggable="true" data-ingredient="🫑">🫑</div>
+        <div class="ingredient" draggable="true" data-ingredient="🥔">🥔</div>
+        <div class="ingredient" draggable="true" data-ingredient="🫛">🫛</div>
+        <div class="ingredient" draggable="true" data-ingredient="🌶️">🌶️</div>
+      </div>
+
+    <div id="pot">
+        <span>Pot</span>
+      </div>
+  </div><br><br>
+
+  <!-- <div id="game">
+    <div class="ingredient" draggable="true" data-ingredient="🥕">🥕</div>
+    <div class="ingredient" draggable="true" data-ingredient="🍅">🍅</div>
+    <div class="ingredient" draggable="true" data-ingredient="🧀">🧀</div>
+    <div class="ingredient" draggable="true" data-ingredient="🌽">🌽</div>
+    <div class="ingredient" draggable="true" data-ingredient="🥦">🥦</div>
+    <div class="ingredient" draggable="true" data-ingredient="🥚">🥚</div>
+    <div class="ingredient" draggable="true" data-ingredient="🧅">🧅</div>
+    <div class="ingredient" draggable="true" data-ingredient="🥬">🥬</div>
+    <div class="ingredient" draggable="true" data-ingredient="🫑">🫑</div>
+    <div class="ingredient" draggable="true" data-ingredient="🥔">🥔</div>
+    <div class="ingredient" draggable="true" data-ingredient="🫛">🫛</div>
+  </div>
+
+  <div id="pot">
+    <span>Pot</span>
+  </div> -->
+
+  <div class="bottom">
+    <div class="left">
+      <div id="result">Drag ingredients to the pot!</div>
+
+    <button id="cook-btn">Cook!</button>
+    </div>
+    <div class="right">
+      <img class="goofy" src="Subject.png"/>
+    </div>
+  </div>
+
+  <script>
+    const pot = document.getElementById('pot');
+    const ingredients = document.querySelectorAll('.ingredient');
+    const result = document.getElementById('result');
+    const btn = document.getElementById('cook-btn');
+    const reset = document.getElementById('reset-btn');
+
+    let i=1;
+
+    let potContents = [];
+
+    // Allow dropping on the pot
+    pot.addEventListener('dragover', (e) => {
+      e.preventDefault();
+    });
+
+    // Handle drop event
+    pot.addEventListener('drop', (e) => {
+      const ingredient = e.dataTransfer.getData('text');
+      if (!potContents.includes(ingredient)) {
+        potContents.push(ingredient);
+        displayInPot(ingredient);
+        updatePot();
+      }
+    });
+
+    // Handle drag start
+    ingredients.forEach((ingredient) => {
+      ingredient.addEventListener('dragstart', (e) => {
+        e.dataTransfer.setData('text', ingredient.dataset.ingredient);
+      });
+    });
+
+    // Display ingredient in the pot
+    function displayInPot(ingredient) {
+        if(i==1) {
+            pot.innerHTML = '';
+            i=0;
+        }
+      const span = document.createElement('span');
+      span.textContent = ingredient;
+      span.className = 'pot-ingredient';
+      pot.appendChild(span);
+    }
+
+    // Update pot contents
+    function updatePot() {
+
+      const contents = potContents.join(', ');
+      result.textContent = `You added: ${contents}`;
+
+      const me = document.querySelector(".goofy");
+      const head = document.querySelector(".header");
+    
+    btn.addEventListener('click', () => {
+        if (potContents.length >= 3) {
+          me.style.display = 'block';
+          head.style.display = 'none';
+          result.textContent = 'Your food WAS ready. It was delicious!';
+        } else {
+          result.textContent = 'Not enough ingredients in the pot!';
+        }
+        pot.innerHTML = '';
+    });
+
+    reset.addEventListener('click', () => {
+        potContents = [];
+        result.textContent = 'Drag ingredients to the pot!';
+        ingredients.forEach((ingredient) => {
+          ingredient.style.border = '2px solid #ffffff';
+          ingredient.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
+        });
+    });
+    }
+  </script>
+</body>
+</html>
